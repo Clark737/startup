@@ -19,8 +19,16 @@ I learned from the simon assignment:
 - I give in when it comes to copy and paste strings of numbers :) but I did make sure I knew what it was doing and played around with it :) 
 - I need to create more bash scripts for my personal projects
 - There is a lot of variety in html
+
 I learned from the second simon assignment
 - bootstrap is almost like css in the html, meaning it makes the css shorter and easyer to use
 - Drawing is a lot easier in css
 - You can have position absolute but have it dynamic
 - Most pages dont need a ton of css with bootstrap, only unique ones
+
+Things I learned from the startup
+- row collum is useful 
+- select is fun but hard to format
+- form is a good way to use selects
+- Making a web page look nice is super hard
+- I am glad that I started early... that would have taken forever!
