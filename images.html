@@ -52,10 +52,76 @@
 
     <main class="container-fluid">
 
-      <div id="btn" class="home_page">
-        <h1 class="text-center main_title">Welcome to Smiling Servers</h1>
-        <img src=https://upload.wikimedia.org/wikipedia/commons/e/ec/Happy_smiley_face.png
-          class="mx-auto d-block logo_main" alt="Responsive image">
+      <div class="page-content page-container" id="page-content">
+        <div class="padding">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-header">Start An Image</div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="select_image">Select An Image</label>
+                      <select class="form-select" id="select_image" aria-label="Default select example">
+                        <option selected value="1">Image of server 1</option>
+                        <option value="2">Image of server 2</option>
+                        <option value="3">Image of server 3</option>
+                      </select>
+                      <small id="imgHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                      <label for="select_host">Select A Host</label>
+                      <select class="form-select" id="select_host" aria-label="Default select example">
+                        <option selected value="1">Host 1</option>
+                        <option value="2">Host 2</option>
+                        <option value="3">Host 3</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="select_memory">Select Memory</label>
+                      <select class="form-select" id="select_memory" aria-label="Default select example">
+                        <option selected value="4">4 G</option>
+                        <option value="8">8 G</option>
+                        <option value="16">16 G</option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Start Image</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-header">Add An Image</div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="Add_Image">Add An Image</label>
+                      <input type="file" class="form-control" id="Add_Image" />
+                      <small id="Help" class="form-text text-muted"></small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-header">Current Stored Images</div>
+                <div class="card-body">
+                  <ul class="list-group">
+                    <li class="list-group-item">Image of server 1</li>
+                    <li class="list-group-item">Image of server 2</li>
+                    <li class="list-group-item">Image of server 3</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
 
     </main>
