@@ -32,3 +32,9 @@ Things I learned from the startup
 - form is a good way to use selects
 - Making a web page look nice is super hard
 - I am glad that I started early... that would have taken forever!
+
+I learned from the 3rd simon assignment
+- there is not one way to code js
+- adding the on click is interesting in the hmtl
+- I need to learn async 
+- I also need to figure out classes better
