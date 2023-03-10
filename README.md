@@ -38,3 +38,10 @@ I learned from the 3rd simon assignment
 - adding the on click is interesting in the hmtl
 - I need to learn async 
 - I also need to figure out classes better
+
+Changes made with js first deployment
+- login functionality - does not need to be safe just implement some thing that works
+- uploading file can just make a new image name - becuase that is what it will do, however it will also send the file to the server for storage. 
+- All pages will display the home screen if user has not logged in. 
+- starting an image will add it to the server and host page
+- add functionality to the cpu and memory usage - add the ablility to update them perioticly 
