@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link href="https://getbootstrap.com/docs/5.1/assets/css/docs.css" rel="stylesheet">
+  <script src="login.js"></script>
 </head>
 
 
@@ -37,18 +38,12 @@
           </li>
         </ul>
         <a class="btn btn-outline-dark btn-login" role="button" href="#">Login</a>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" <button class="btn btn-outline-success"
-            type="submit">Search</button>
-        </form>
       </div>
     </div>
   </nav>
 </header>
 
 <main>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rl="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!------ Include the above in your HEAD tag ---------->
 
@@ -66,12 +61,12 @@
       <form>
         <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
         <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-        <input type="submit" class="fadeIn fourth" value="Log In">
+        <input type="button" class="fadeIn fourth" value="Log In" onclick="loginFunk()">
       </form>
 
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="#">Forgot Password?</a>
+        <button class="underlineHover" id="signUpButton" onclick="signup()">Sign Up?</button>
       </div>
 
     </div>
