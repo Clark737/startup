@@ -45,3 +45,10 @@ Changes made with js first deployment
 - All pages will display the home screen if user has not logged in. 
 - starting an image will add it to the server and host page
 - add functionality to the cpu and memory usage - add the ablility to update them perioticly 
+
+Things I learned
+- knowing sentax saves hours of work...
+- local mem is interesting and useful 
+- You can delete local mem with a function and it is easy localStorage.removeItem(keyname)
+- I dont know how to make login and passwords actualy safe 
+

@@ -41,9 +41,18 @@ $(document).ready(function () {
         $("<option value=\""+ i.toString() + "\">" + images[i][0] + "</option>").appendTo("#select_image");
       }
     }
+    let host = $("#select_image").find(":selected").val();
+    console.log(images[+host]);
 
+    document.getElementById('host_print').innerHTML = "Running On Host " + images[+host][2];
+
+    let unusedMem = images[+host][1] - 3;
+    memChart.data.datasets[0].data = [3, unusedMem];
+    memChart.update();
+    cpuChart.data.datasets[0].data = [100/images[+host][1], 100 - 100/images[+host][1]];
+    cpuChart.update();
   }
-  updateList();
+  
 
   let memCtx = $("#mem_chart");
   let memChart = new Chart(memCtx, {
@@ -71,7 +80,7 @@ $(document).ready(function () {
     options: {
     }
   });
-
+  updateList();
   $("#select_image").change(function () {
     let host = $("#select_image").find(":selected").val();
     console.log(images[+host]);
