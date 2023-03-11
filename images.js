@@ -83,7 +83,7 @@ $(document).ready(function () {
     else {
       hostList = JSON.parse(hostList);
     }
-    hostList.push([image, memory]);
+    hostList.push([image, memory, host]);
     if (host === '1') {
       localStorage.setItem("host1", JSON.stringify(hostList));
     }
