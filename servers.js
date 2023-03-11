@@ -1,4 +1,19 @@
 $(document).ready(function () {
+
+  let loggedIn = localStorage.getItem("login");
+  if (loggedIn === null){
+    loggedIn = "False";
+  }
+  console.log(loggedIn);
+  if (loggedIn === "False"){
+    $(location).attr('href',"login.html");
+  }
+
+  document.getElementById('logout').addEventListener('click', () => {
+    localStorage.setItem("login","False");
+    $(location).attr('href',"login.html");
+ });
+
   let memCtx = $("#mem_chart");
   let memChart = new Chart(memCtx, {
     type: 'pie',
@@ -26,3 +41,8 @@ $(document).ready(function () {
     }
   });
 });
+
+function logoutFunk(){
+  localStorage.setItem("login", "False");
+  window.location.href = "login.html";
+}

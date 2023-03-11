@@ -40,11 +40,7 @@
                 <a class="nav-link" href="#">Hosts</a>
               </li>
             </ul>
-            <a class="btn btn-outline-dark btn-login" role="button" href="login.html">Login</a>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" <button
-                class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            <button class="btn btn-outline-dark btn-login" role="button" id="logout">Logout</button>
           </div>
         </div>
       </nav>
@@ -58,20 +54,22 @@
               <div class="card">
                 <div class="card-header">Hosts</div>
                 <div class="card-body">
-                  <div>
-                    Current Host: Host 1
-                  </div>
-                  <ul class="list-group">
-                    <li class="list-group-item">Host 1</li>
-                    <li class="list-group-item">Host 2</li>
-                    <li class="list-group-item">Host 3</li>
-                  </ul>
+                  <form>
+                    <div class="form-group">
+                      <label for="select_host">Select A Host</label>
+                      <select class="form-select" id="select_host" aria-label="Default select example">
+                        <option selected value="1">Host 1</option>
+                        <option value="2">Host 2</option>
+                        <option value="3">Host 3</option>
+                      </select>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="card">
-                <div class="card-header">Images Running</div>
+                <div class="card-header">Images Running On Host</div>
                 <div class="card-body">
                   <ul class="list-group">
                     <li class="list-group-item">Image 1</li>
