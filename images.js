@@ -23,6 +23,10 @@ $(document).ready(function () {
       }
     }
   }
+  else{
+    $("#Image_List").empty();
+    $("#select_image").empty();
+  }
 
 
 

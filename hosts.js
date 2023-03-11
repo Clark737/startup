@@ -14,19 +14,30 @@ $(document).ready(function () {
 
 
   let loggedIn = localStorage.getItem("login");
-  if (loggedIn === null){
+  if (loggedIn === null) {
     loggedIn = "False";
   }
   console.log(loggedIn);
-  if (loggedIn === "False"){
-    $(location).attr('href',"login.html");
+  if (loggedIn === "False") {
+    $(location).attr('href', "login.html");
   }
 
   document.getElementById('logout').addEventListener('click', () => {
-    localStorage.setItem("login","False");
-    $(location).attr('href',"login.html");
- });
+    localStorage.setItem("login", "False");
+    $(location).attr('href', "login.html");
+  });
 
+
+  images = JSON.parse(localStorage.getItem("host1"));
+  if (images != null) {
+    $("#image_list").empty();
+    for (let i = 0; i < images.length; i++) {
+      $("<li class=\"list-group-item\">" + images[i][0] + "</li>").appendTo("#image_list");
+    }
+  }
+  else {
+    $("#image_list").empty();
+  }
 
   let memCtx = $("#mem_chart");
   let memChart = new Chart(memCtx, {
@@ -59,29 +70,65 @@ $(document).ready(function () {
 
 
 
-  $( "#select_host" ).change(function() {
-    let host = $( "#select_host" ).find(":selected").val();
+  $("#select_host").change(function () {
+    let host = $("#select_host").find(":selected").val();
     console.log(host);
-    if(host === '1'){
+    if (host === '1') {
       let unusedMem = hostOneMem - currentMemOne;
       memChart.data.datasets[0].data = [currentMemOne, unusedMem];
       memChart.update();
       cpuChart.data.datasets[0].data = [currentCPUOne, 100 - currentCPUOne];
       cpuChart.update();
+
+      images = JSON.parse(localStorage.getItem("host1"));
+      if (images != null) {
+        $("#image_list").empty();
+        for (let i = 0; i < images.length; i++) {
+          $("<li class=\"list-group-item\">" + images[i][0] + "</li>").appendTo("#image_list");
+        }
+      }
+      else {
+        $("#image_list").empty();
+      }
+
     }
-    if(host === '2'){
+    if (host === '2') {
       let unusedMem = hostTwoMem - currentMemTwo;
       memChart.data.datasets[0].data = [currentMemTwo, unusedMem];
       memChart.update();
       cpuChart.data.datasets[0].data = [currentCPUTwo, 100 - currentCPUTwo];
       cpuChart.update();
+
+
+      images = JSON.parse(localStorage.getItem("host2"));
+      if (images != null) {
+        $("#image_list").empty();
+        for (let i = 0; i < images.length; i++) {
+          $("<li class=\"list-group-item\">" + images[i][0] + "</li>").appendTo("#image_list");
+        }
+      }
+      else {
+        $("#image_list").empty();
+      }
     }
-    if(host === '3'){
+    if (host === '3') {
       let unusedMem = hostThreeMem - currentMemThree;
       memChart.data.datasets[0].data = [currentMemThree, unusedMem];
       memChart.update();
       cpuChart.data.datasets[0].data = [currentCPUThree, 100 - currentCPUThree];
       cpuChart.update();
+
+
+      images = JSON.parse(localStorage.getItem("host3"));
+      if (images != null) {
+        $("#image_list").empty();
+        for (let i = 0; i < images.length; i++) {
+          $("<li class=\"list-group-item\">" + images[i][0] + "</li>").appendTo("#image_list");
+        }
+      }
+      else {
+        $("#image_list").empty();
+      }
     }
   });
 
