@@ -94,6 +94,38 @@ $(document).ready(function () {
     cpuChart.update();
 
   });
+  $("#shut_down_btn").click(function () {
+    let host = $("#select_image").find(":selected").val();
+    console.log(images[+host]);
+    
+    images = images.splice(+host, +host);
+
+    let host1Val = [];
+    let host2Val = [];
+    let host3Val = [];
+
+
+
+    for (let i =0;i< images.length; ++i){
+      console.log(images[i]);
+      if (+images[i][2] === 1){
+        host1Val.push(images[i]);
+      }
+      else if (+images[i][2] === 2){
+        host2Val.push(images[i]);
+      }
+      else if (+images[i][2] === 3){
+        host3Val.push(images[i]);
+      }
+    }
+
+    localStorage.setItem("host1",JSON.stringify(host1Val));
+    localStorage.setItem("host2",JSON.stringify(host2Val));
+    localStorage.setItem("host3",JSON.stringify(host3Val));
+
+
+    updateList();
+  });
 
 
 });
