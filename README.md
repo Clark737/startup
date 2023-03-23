@@ -52,3 +52,10 @@ Things I learned
 - You can delete local mem with a function and it is easy localStorage.removeItem(keyname)
 - I dont know how to make login and passwords actualy safe 
 
+Service info
+- npm init -y allows it to work with node.js
+- node_modules can be ingored
+- npm install express  will work
+- need the correct version of nvm depending on the version of linux, on my personal computer the version is "nvm install 16.14.0"
+- everything else seems fairly straight forward. 
+
