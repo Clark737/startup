@@ -58,4 +58,11 @@ Service info
 - npm install express  will work
 - need the correct version of nvm depending on the version of linux, on my personal computer the version is "nvm install 16.14.0"
 - everything else seems fairly straight forward. 
-
+Login info
+- passwords are stored as a hash and then compaired
+- They are then stored in a database 
+- https://github.com/webprogramming260/.github/blob/main/profile/webServices/login/login.md use this to make it for my startup
+- There is no way to delete a created account...
+- Neither does my startup
+- I would have the about page apear when you can log in because it tells people what they are getting into. 
+- It would involve headder work and it was not simple to add similar functionality to my startup
