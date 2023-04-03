@@ -75,3 +75,18 @@ Web socks
 - cant log in with two different names but it will work just logged in with one
 - Honestly I liked the labs more when we coded them ourselves
 - but I guess I can just do it on my start up
+
+End points for startup
+- login and logout
+- delete user?
+- add image
+- start image
+- stop image
+- delete image
+- get all images
+- get all servers
+- get all servers on a host
+- get cpu usage server
+- get mem usage server
+- get cpu usage host
+- get mem usage host
