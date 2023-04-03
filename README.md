@@ -52,3 +52,41 @@ Things I learned
 - You can delete local mem with a function and it is easy localStorage.removeItem(keyname)
 - I dont know how to make login and passwords actualy safe 
 
+Service info
+- npm init -y allows it to work with node.js
+- node_modules can be ingored
+- npm install express  will work
+- need the correct version of nvm depending on the version of linux, on my personal computer the version is "nvm install 16.14.0"
+- everything else seems fairly straight forward. 
+
+Login info
+- passwords are stored as a hash and then compaired
+- They are then stored in a database 
+- https://github.com/webprogramming260/.github/blob/main/profile/webServices/login/login.md use this to make it for my startup
+- There is no way to delete a created account...
+- Neither does my startup
+- I would have the about page apear when you can log in because it tells people what they are getting into. 
+- It would involve headder work and it was not simple to add similar functionality to my startup
+
+Web socks
+- I think I will use this to auto update the information gathered by the server
+- I can rewatch the class from the announcement 
+- It seems fairly straight forward
+- cant log in with two different names but it will work just logged in with one
+- Honestly I liked the labs more when we coded them ourselves
+- but I guess I can just do it on my start up
+
+End points for startup
+- login and logout
+- delete user?
+- add image
+- start image
+- stop image
+- delete image
+- get all images
+- get all servers
+- get all servers on a host
+- get cpu usage server
+- get mem usage server
+- get cpu usage host
+- get mem usage host
