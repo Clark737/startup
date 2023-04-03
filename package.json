@@ -1,0 +1,23 @@
+{
+  "name": "startup",
+  "version": "1.0.0",
+  "description": "Have you ever wanted to run a server for each of the games you played? Or maybe you want to be able to swap what server is currently running without a hassle. You can with the Server handler! The Server Handler makes running servers easy by telling you exactly what you want to know. It includes images of your previous servers already set up as well as what servers are already running! ![alt text](./Example1.jpg) Key features:",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clark737/startup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Clark737/startup/issues"
+  },
+  "homepage": "https://github.com/Clark737/startup#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
