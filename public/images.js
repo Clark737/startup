@@ -1,13 +1,34 @@
-$(document).ready(function () {
+(async () => {
+  let authenticated = false;
+  const userName = localStorage.getItem('userName');
+  if (userName) {
+    const user = await getUser(userName);
+    authenticated = user?.authenticated;
+  }
 
-  let loggedIn = localStorage.getItem("login");
-  if (loggedIn === null) {
-    loggedIn = "False";
+  if (!authenticated) {
+    window.location.href = "/";
+  } 
+})();
+
+function logout() {
+  fetch(`/api/auth/logout`, {
+    method: 'delete',
+  }).then(() => (window.location.href = '/'));
+}
+
+async function getUser(userName) {
+  // See if we have a user with the given userName.
+  const response = await fetch(`/api/user/${userName}`);
+  if (response.status === 200) {
+    return response.json();
   }
-  console.log(loggedIn);
-  if (loggedIn === "False") {
-    $(location).attr('href', "login.html");
-  }
+
+  return null;
+}
+
+
+$(document).ready(function () {
 
   images = JSON.parse(localStorage.getItem("images"));
   if (images != null) {
@@ -27,13 +48,6 @@ $(document).ready(function () {
     $("#Image_List").empty();
     $("#select_image").empty();
   }
-
-
-
-  document.getElementById('logout').addEventListener('click', () => {
-    localStorage.setItem("login", "False");
-    $(location).attr('href', "login.html");
-  });
 
   document.getElementById('add_image_btn').addEventListener('click', () => {
     imageName = document.getElementById("Add_Image").value.split('\\');
