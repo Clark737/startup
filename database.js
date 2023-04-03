@@ -13,23 +13,23 @@ if (!userName) {
 const url = `mongodb+srv://${userName}:${password}@${hostname}`;
 
 const client = new MongoClient(url);
-const userCollection = client.db('simon').collection('user');
-const scoreCollection = client.db('simon').collection('score');
+const userCollection = client.db('startup').collection('user');
+const scoreCollection = client.db('startup').collection('score');
 
-function getUser(email) {
-  return userCollection.findOne({ email: email });
+function getUser(userName) {
+  return userCollection.findOne({ userName: userName });
 }
 
 function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
 
-async function createUser(email, password) {
+async function createUser(userName, password) {
   // Hash the password before we insert it into the database
   const passwordHash = await bcrypt.hash(password, 10);
 
   const user = {
-    email: email,
+    userName: userName,
     password: passwordHash,
     token: uuid.v4(),
   };
