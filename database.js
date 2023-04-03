@@ -15,6 +15,7 @@ const url = `mongodb+srv://${userName}:${password}@${hostname}`;
 const client = new MongoClient(url);
 const userCollection = client.db('startup').collection('user');
 const imageCollection = client.db('startup').collection('image');
+const serverCollection = client.db('startup').collection('server');
 
 function getUser(userName) {
   return userCollection.findOne({ userName: userName });
@@ -42,6 +43,10 @@ function addImage(image) {
   imageCollection.insertOne(image);
 }
 
+function startImage(image){
+  serverCollection.insertOne(image);
+}
+
 function getImage(image) {
   return imageCollection.findOne({name: image});
 }
@@ -60,4 +65,5 @@ module.exports = {
   addImage,
   getAllImages,
   getImage,
+  startImage,
 };

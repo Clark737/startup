@@ -100,10 +100,9 @@ secureApiRouter.post('/add', async (req, res) => {
 });
 
 // start image
-secureApiRouter.post('/start/:image', async (req, res) => {
-  await DB.addScore(req.body);
-  const scores = await DB.getAllImages();
-  res.send(scores);
+secureApiRouter.post('/start', async (req, res) => {
+  await DB.startImage(req.body);
+  res.send();
 });
 
 // stop server

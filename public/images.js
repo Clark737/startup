@@ -78,42 +78,31 @@ async function saveImage() {
   }
 }
 
+async function startImage() {
+  let host = document.getElementById("select_host").value;
+  let image = document.getElementById("select_image");
+  image = image.options[image.selectedIndex].text;
+  let memory = document.getElementById("select_memory").value;
+
+  const serverstart = { host: host, name: image, memory: memory };
+  try {
+    const response = await fetch('/api/start', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(serverstart),
+    });
+    window.location.href = 'servers.html'
+  } catch {
+    // If there was an error then just dont do anything
+
+  }
+
+}
+
 $(document).ready(function () {
 
   updateImages();
 
-  document.getElementById('start_image').addEventListener('click', () => {
-    let host = $("#select_host").find(":selected").val();
-    let image = $("#select_image").find(":selected").text();
-    let memory = $("#select_memory").find(":selected").val();
 
-    if (host === '1') {
-      hostList = localStorage.getItem("host1");
-    }
-    else if (host === '2') {
-      hostList = localStorage.getItem("host2");
-    }
-    else if (host === '3') {
-      hostList = localStorage.getItem("host2");
-    }
-    if (hostList === null) {
-      hostList = [];
-    }
-    else {
-      hostList = JSON.parse(hostList);
-    }
-    hostList.push([image, memory, host]);
-    if (host === '1') {
-      localStorage.setItem("host1", JSON.stringify(hostList));
-    }
-    else if (host === '2') {
-      localStorage.setItem("host2", JSON.stringify(hostList));
-    }
-    else if (host === '3') {
-      localStorage.setItem("host3", JSON.stringify(hostList));
-    }
-    $(location).attr('href', "servers.html");
-
-  });
 
 });
