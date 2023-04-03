@@ -1,3 +1,33 @@
+(async () => {
+  let authenticated = false;
+  const userName = localStorage.getItem('userName');
+  if (userName) {
+    const user = await getUser(userName);
+    authenticated = user?.authenticated;
+  }
+
+  if (!authenticated) {
+    window.location.href = "/";
+  } 
+})();
+
+function logout() {
+  fetch(`/api/auth/logout`, {
+    method: 'delete',
+  }).then(() => (window.location.href = '/'));
+}
+
+async function getUser(userName) {
+  // See if we have a user with the given userName.
+  const response = await fetch(`/api/user/${userName}`);
+  if (response.status === 200) {
+    return response.json();
+  }
+
+  return null;
+}
+
+
 $(document).ready(function () {
 
   const hostOneMem = 32;
@@ -11,21 +41,6 @@ $(document).ready(function () {
   let currentCPUOne = 15;
   let currentCPUTwo = 28;
   let currentCPUThree = 99;
-
-
-  let loggedIn = localStorage.getItem("login");
-  if (loggedIn === null) {
-    loggedIn = "False";
-  }
-  console.log(loggedIn);
-  if (loggedIn === "False") {
-    $(location).attr('href', "login.html");
-  }
-
-  document.getElementById('logout').addEventListener('click', () => {
-    localStorage.setItem("login", "False");
-    $(location).attr('href', "login.html");
-  });
 
 
   images = JSON.parse(localStorage.getItem("host1"));
