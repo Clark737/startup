@@ -8,7 +8,7 @@
 
   if (!authenticated) {
     window.location.href = "/";
-  } 
+  }
 })();
 
 function logout() {
@@ -42,18 +42,23 @@ $(document).ready(function () {
   let currentCPUTwo = 28;
   let currentCPUThree = 99;
 
+  async function getServers(host) {
+    try {
+      const response = await fetch('/api/runningOn/' + host, {
+        method: 'GET',
+      });
 
-  images = JSON.parse(localStorage.getItem("host1"));
-  if (images != null) {
-    $("#image_list").empty();
-    for (let i = 0; i < images.length; i++) {
-      $("<li class=\"list-group-item\">" + images[i][0] + "</li>").appendTo("#image_list");
+      const images = await response.json();
+      $("#image_list").empty();
+      for (let i = 0; i < images.length; i++) {
+        $("<li class=\"list-group-item\">" + images[i].name + "</li>").appendTo("#image_list");
+      }
+    }
+    catch {
+
     }
   }
-  else {
-    $("#image_list").empty();
-  }
-
+  getServers("1");
   let memCtx = $("#mem_chart");
   let memChart = new Chart(memCtx, {
     type: 'pie',
@@ -95,16 +100,7 @@ $(document).ready(function () {
       cpuChart.data.datasets[0].data = [currentCPUOne, 100 - currentCPUOne];
       cpuChart.update();
 
-      images = JSON.parse(localStorage.getItem("host1"));
-      if (images != null) {
-        $("#image_list").empty();
-        for (let i = 0; i < images.length; i++) {
-          $("<li class=\"list-group-item\">" + images[i][0] + "</li>").appendTo("#image_list");
-        }
-      }
-      else {
-        $("#image_list").empty();
-      }
+      getServers("1");
 
     }
     if (host === '2') {
@@ -115,16 +111,7 @@ $(document).ready(function () {
       cpuChart.update();
 
 
-      images = JSON.parse(localStorage.getItem("host2"));
-      if (images != null) {
-        $("#image_list").empty();
-        for (let i = 0; i < images.length; i++) {
-          $("<li class=\"list-group-item\">" + images[i][0] + "</li>").appendTo("#image_list");
-        }
-      }
-      else {
-        $("#image_list").empty();
-      }
+      getServers("2");
     }
     if (host === '3') {
       let unusedMem = hostThreeMem - currentMemThree;
@@ -134,16 +121,7 @@ $(document).ready(function () {
       cpuChart.update();
 
 
-      images = JSON.parse(localStorage.getItem("host3"));
-      if (images != null) {
-        $("#image_list").empty();
-        for (let i = 0; i < images.length; i++) {
-          $("<li class=\"list-group-item\">" + images[i][0] + "</li>").appendTo("#image_list");
-        }
-      }
-      else {
-        $("#image_list").empty();
-      }
+      getServers("3");
     }
   });
 

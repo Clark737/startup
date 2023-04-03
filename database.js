@@ -60,6 +60,12 @@ function getAllImages() {
   const cursor = imageCollection.find(query, options);
   return cursor.toArray();
 }
+function getAllImagesHost(host) {
+  const query = {host: host};
+  const options = {};
+  const cursor = serverCollection.find(query, options);
+  return cursor.toArray();
+}
 
 function getAllServers() {
   const query = {};
@@ -78,4 +84,5 @@ module.exports = {
   startImage,
   getAllServers,
   stopServer,
+  getAllImagesHost,
 };

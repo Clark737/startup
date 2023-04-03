@@ -132,7 +132,7 @@ secureApiRouter.get('/serverAll', async (req, res) => {
 
 // get all servers on host
 secureApiRouter.get('/runningOn/:host', async (req, res) => {
-  const scores = await DB.getAllImages();
+  const scores = await DB.getAllImagesHost(req.params.host);
   res.send(scores);
 });
 
