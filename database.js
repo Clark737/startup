@@ -14,7 +14,7 @@ const url = `mongodb+srv://${userName}:${password}@${hostname}`;
 
 const client = new MongoClient(url);
 const userCollection = client.db('startup').collection('user');
-const scoreCollection = client.db('startup').collection('score');
+const imageCollection = client.db('startup').collection('image');
 
 function getUser(userName) {
   return userCollection.findOne({ userName: userName });
@@ -38,17 +38,18 @@ async function createUser(userName, password) {
   return user;
 }
 
-function addScore(score) {
-  scoreCollection.insertOne(score);
+function addImage(image) {
+  imageCollection.insertOne(image);
 }
 
-function getHighScores() {
+function getImage(image) {
+  return imageCollection.findOne({name: image});
+}
+
+function getAllImages() {
   const query = {};
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
-  };
-  const cursor = scoreCollection.find(query, options);
+  const options = {};
+  const cursor = imageCollection.find(query, options);
   return cursor.toArray();
 }
 
@@ -56,6 +57,7 @@ module.exports = {
   getUser,
   getUserByToken,
   createUser,
-  addScore,
-  getHighScores,
+  addImage,
+  getAllImages,
+  getImage,
 };

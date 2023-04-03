@@ -8,7 +8,7 @@
 
   if (!authenticated) {
     window.location.href = "/";
-  } 
+  }
 })();
 
 function logout() {
@@ -27,55 +27,60 @@ async function getUser(userName) {
   return null;
 }
 
+async function updateImages() {
+
+  try {
+    const response = await fetch('/api/imageAll', {
+      method: 'GET',
+    });
+
+    // Store what the service gave us as the high scores
+    const images = await response.json();
+    $("#Image_List").empty();
+    $("#select_image").empty();
+    for (let i = 0; i < images.length; i++) {
+      $("<li class=\"list-group-item\">" + images[i].name + "</li>").appendTo("#Image_List");
+      if (i === 0) {
+        $("<option selected value=\"" + i + "\">" + images[i].name + "</option>").appendTo("#select_image");
+      }
+      else {
+        $("<option value=\"" + i + "\">" + images[i].name + "</option>").appendTo("#select_image");
+      }
+    }
+
+  } catch {
+    // If there was an error then just track scores locally
+    this.updateScoresLocal(newScore);
+  }
+
+}
+
+async function saveImage() {
+  imageName = document.getElementById("Add_Image").value.split('\\');
+  imageName = imageName[imageName.length - 1].split('.')[0];
+  console.log(imageName);
+
+  if (imageName != "") {
+    const newImage = { name: imageName };
+
+    try {
+      const response = await fetch('/api/add', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(newImage),
+      });
+
+    } catch {
+      // If there was an error then just dont do anything
+
+    }
+    updateImages();
+  }
+}
 
 $(document).ready(function () {
 
-  images = JSON.parse(localStorage.getItem("images"));
-  if (images != null) {
-    $("#Image_List").empty();
-    $("#select_image").empty();
-    for (let i = 0; i < images.length; i++) {
-      $("<li class=\"list-group-item\">" + images[i] + "</li>").appendTo("#Image_List");
-      if (i === 0) {
-        $("<option selected value=\"" + i + "\">" + images[i] + "</option>").appendTo("#select_image");
-      }
-      else {
-        $("<option value=\"" + i + "\">" + images[i] + "</option>").appendTo("#select_image");
-      }
-    }
-  }
-  else{
-    $("#Image_List").empty();
-    $("#select_image").empty();
-  }
-
-  document.getElementById('add_image_btn').addEventListener('click', () => {
-    imageName = document.getElementById("Add_Image").value.split('\\');
-    imageName = imageName[imageName.length - 1].split('.')[0];
-    console.log(imageName);
-    images = localStorage.getItem("images");
-    if (images === null) {
-      images = [];
-      if (imageName != "") {
-        images.push(imageName);
-      }
-
-    }
-    else {
-      images = JSON.parse(images);
-      if (!images.includes(imageName)) {
-        if (imageName != "") {
-          images.push(imageName);
-        }
-      }
-    }
-    localStorage.setItem("images", JSON.stringify(images));
-    $("#Image_List").empty();
-    for (let i = 0; i < images.length; i++) {
-      $("<li class=\"list-group-item\">" + images[i] + "</li>").appendTo("#Image_List");
-    }
-  });
-
+  updateImages();
 
   document.getElementById('start_image').addEventListener('click', () => {
     let host = $("#select_host").find(":selected").val();

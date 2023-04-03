@@ -82,18 +82,86 @@ secureApiRouter.use(async (req, res, next) => {
   }
 });
 
-// GetScores
-secureApiRouter.get('/scores', async (req, res) => {
-  const scores = await DB.getHighScores();
+// Get Server
+secureApiRouter.get('/server/:server', async (req, res) => {
+  const scores = await DB.getAllImages();
   res.send(scores);
 });
 
-// SubmitScore
-secureApiRouter.post('/score', async (req, res) => {
+// Add image
+secureApiRouter.post('/add', async (req, res) => {
+  if (await DB.getImage(req.body.name)) {
+    res.send();
+  }
+  else{
+    await DB.addImage(req.body);
+    res.send();
+  }
+});
+
+// start image
+secureApiRouter.post('/start/:image', async (req, res) => {
   await DB.addScore(req.body);
-  const scores = await DB.getHighScores();
+  const scores = await DB.getAllImages();
   res.send(scores);
 });
+
+// stop server
+secureApiRouter.delete('/stop/:host/:server', async (req, res) => {
+  await DB.addScore(req.body);
+  const scores = await DB.getAllImages();
+  res.send(scores);
+});
+
+// delete image
+secureApiRouter.delete('/deleteImg/:image', async (req, res) => {
+  await DB.addScore(req.body);
+  const scores = await DB.getAllImages();
+  res.send(scores);
+});
+
+// get all images
+secureApiRouter.get('/imageAll', async (req, res) => {
+  const images = await DB.getAllImages();
+  res.send(images);
+});
+
+// get all servers
+secureApiRouter.get('/serverAll', async (req, res) => {
+  const scores = await DB.getAllImages();
+  res.send(scores);
+});
+
+// get all servers on host
+secureApiRouter.get('/runningOn/:host', async (req, res) => {
+  const scores = await DB.getAllImages();
+  res.send(scores);
+});
+
+// get cpu server
+secureApiRouter.get('/cpuSrv/:host/:server', async (req, res) => {
+  const scores = await DB.getAllImages();
+  res.send(scores);
+});
+
+// get mem server
+secureApiRouter.get('/memSrv/:host/:server', async (req, res) => {
+  const scores = await DB.getAllImages();
+  res.send(scores);
+});
+
+// get cpu host
+secureApiRouter.get('/cpu/:host', async (req, res) => {
+  const scores = await DB.getAllImages();
+  res.send(scores);
+});
+
+// get cpu server
+secureApiRouter.get('/mem/:host', async (req, res) => {
+  const scores = await DB.getAllImages();
+  res.send(scores);
+});
+
 
 // Default error handler
 app.use(function (err, req, res, next) {
