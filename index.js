@@ -93,7 +93,7 @@ secureApiRouter.post('/add', async (req, res) => {
   if (await DB.getImage(req.body.name)) {
     res.send();
   }
-  else{
+  else {
     await DB.addImage(req.body);
     res.send();
   }
@@ -106,10 +106,9 @@ secureApiRouter.post('/start', async (req, res) => {
 });
 
 // stop server
-secureApiRouter.delete('/stop/:host/:server', async (req, res) => {
-  await DB.addScore(req.body);
-  const scores = await DB.getAllImages();
-  res.send(scores);
+secureApiRouter.post('/stop', async (req, res) => {
+  await DB.stopServer(req.body);
+  res.send();
 });
 
 // delete image
@@ -127,7 +126,7 @@ secureApiRouter.get('/imageAll', async (req, res) => {
 
 // get all servers
 secureApiRouter.get('/serverAll', async (req, res) => {
-  const scores = await DB.getAllImages();
+  const scores = await DB.getAllServers();
   res.send(scores);
 });
 

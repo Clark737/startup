@@ -43,18 +43,28 @@ function addImage(image) {
   imageCollection.insertOne(image);
 }
 
-function startImage(image){
+function startImage(image) {
   serverCollection.insertOne(image);
+}
+function stopServer(image) {
+  serverCollection.deleteOne(image);
 }
 
 function getImage(image) {
-  return imageCollection.findOne({name: image});
+  return imageCollection.findOne({ name: image });
 }
 
 function getAllImages() {
   const query = {};
   const options = {};
   const cursor = imageCollection.find(query, options);
+  return cursor.toArray();
+}
+
+function getAllServers() {
+  const query = {};
+  const options = {};
+  const cursor = serverCollection.find(query, options);
   return cursor.toArray();
 }
 
@@ -66,4 +76,6 @@ module.exports = {
   getAllImages,
   getImage,
   startImage,
+  getAllServers,
+  stopServer,
 };

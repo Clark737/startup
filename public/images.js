@@ -34,7 +34,7 @@ async function updateImages() {
       method: 'GET',
     });
 
-    // Store what the service gave us as the high scores
+    // Store what the service gave us as the images
     const images = await response.json();
     $("#Image_List").empty();
     $("#select_image").empty();

@@ -9,7 +9,7 @@
 
   if (!authenticated) {
     window.location.href = "/";
-  } 
+  }
 })();
 
 function logout() {
@@ -28,47 +28,52 @@ async function getUser(userName) {
   return null;
 }
 
+
 $(document).ready(function () {
   let host1Img = JSON.parse(localStorage.getItem("host1"));
   let host2Img = JSON.parse(localStorage.getItem("host2"));
   let host3Img = JSON.parse(localStorage.getItem("host3"));
 
-  function updateList() {
-    $("#select_image").empty();
-    if (host1Img === null){
-      images = [];
-    }
-    else{
-      images = host1Img;
-    }
-    if (host2Img != null){
-      images = images.concat(host2Img)
-    }
-    if (host3Img != null){
-      images = images.concat(host3Img)
-    }
+  async function updateList() {
+    try {
+      const response = await fetch('/api/serverAll', {
+        method: 'GET',
+      });
 
-    for (let i = 0; i < images.length; i++) {
 
-      if (i === 0) {
-        $("<option selected value=\""+ i.toString() + "\">" + images[i][0] + "</option>").appendTo("#select_image");
+      const images = await response.json();
+      $("#select_image").empty();
+      for (let i = 0; i < images.length; i++) {
+
+        if (i === 0) {
+          $("<option selected value=\"" + images[i]._id + "\">" + images[i].name + "</option>").appendTo("#select_image");
+        }
+        else {
+          $("<option value=\"" + images[i]._id + "\">" + images[i].name + "</option>").appendTo("#select_image");
+        }
       }
-      else {
-        $("<option value=\""+ i.toString() + "\">" + images[i][0] + "</option>").appendTo("#select_image");
+      let host = $("#select_image").find(":selected").val();
+      for (let i = 0; i < images.length; i++) {
+        if (images[i]._id === host) {
+          document.getElementById('host_print').innerHTML = "Running On Host " + images[i].host;
+          let unusedMem = images[i].memory - 3;
+          memChart.data.datasets[0].data = [3, unusedMem];
+          memChart.update();
+          cpuChart.data.datasets[0].data = [100 / images[i].memory, 100 - 100 / images[i].memory];
+          cpuChart.update();
+          break;
+        }
       }
+      return images;
+
+
+
+    } catch {
+      // If there was an error then just dont do anything
+
     }
-    let host = $("#select_image").find(":selected").val();
-    console.log(images[+host]);
-
-    document.getElementById('host_print').innerHTML = "Running On Host " + images[+host][2];
-
-    let unusedMem = images[+host][1] - 3;
-    memChart.data.datasets[0].data = [3, unusedMem];
-    memChart.update();
-    cpuChart.data.datasets[0].data = [100/images[+host][1], 100 - 100/images[+host][1]];
-    cpuChart.update();
   }
-  
+
 
   let memCtx = $("#mem_chart");
   let memChart = new Chart(memCtx, {
@@ -96,52 +101,70 @@ $(document).ready(function () {
     options: {
     }
   });
-  updateList();
-  $("#select_image").change(function () {
-    let host = $("#select_image").find(":selected").val();
-    console.log(images[+host]);
+  let images = updateList();
+  $("#select_image").change(async function () {
+    try {
+      const response = await fetch('/api/serverAll', {
+        method: 'GET',
+      });
 
-    document.getElementById('host_print').innerHTML = "Running On Host " + images[+host][2];
 
-    let unusedMem = images[+host][1] - 3;
-    memChart.data.datasets[0].data = [3, unusedMem];
-    memChart.update();
-    cpuChart.data.datasets[0].data = [100/images[+host][1], 100 - 100/images[+host][1]];
-    cpuChart.update();
+      const images = await response.json();
+      let host = $("#select_image").find(":selected").val();
+      for (let i = 0; i < images.length; i++) {
+        if (images[i]._id === host) {
+          document.getElementById('host_print').innerHTML = "Running On Host " + images[i].host;
+          let unusedMem = images[i].memory - 3;
+          memChart.data.datasets[0].data = [3, unusedMem];
+          memChart.update();
+          cpuChart.data.datasets[0].data = [100 / images[i].memory, 100 - 100 / images[i].memory];
+          cpuChart.update();
+          break;
+        }
+      }
+      return images;
 
+
+
+    } catch {
+      // If there was an error then just dont do anything
+
+    }
   });
-  // $("#shut_down_btn").click(function () {
-  //   let host = $("#select_image").find(":selected").val();
-  //   console.log(images[+host]);
+  $("#shut_down_btn").click(async function () {
+    let host = $("#select_image").find(":selected").val();
+    messg = { _id: host };
+    try {
+      const response = await fetch('/api/serverAll', {
+        method: 'GET',
+      });
+
+
+      const images = await response.json();
+      let host = $("#select_image").find(":selected").val();
+      for (let i = 0; i < images.length; i++) {
+        if (images[i]._id === host) {
+          messg = {name: images[i].name, host: images[i].host, memory: images[i].memory}
+          break;
+        }
+      }
+    } catch {
+      // If there was an error then just dont do anything
+
+    }
     
-  //   images = images.splice(+host, +host);
+    console.log(JSON.stringify(messg));
+    try {
+      const response = await fetch('/api/stop', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(messg),
+      });
+    } catch {
+      // If there was an error then just dont do anything
 
-  //   let host1Val = [];
-  //   let host2Val = [];
-  //   let host3Val = [];
-
-
-
-  //   for (let i =0;i< images.length; ++i){
-  //     console.log(images[i]);
-  //     if (+images[i][2] === 1){
-  //       host1Val.push(images[i]);
-  //     }
-  //     else if (+images[i][2] === 2){
-  //       host2Val.push(images[i]);
-  //     }
-  //     else if (+images[i][2] === 3){
-  //       host3Val.push(images[i]);
-  //     }
-  //   }
-
-  //   localStorage.setItem("host1",JSON.stringify(host1Val));
-  //   localStorage.setItem("host2",JSON.stringify(host2Val));
-  //   localStorage.setItem("host3",JSON.stringify(host3Val));
-
-
-  //   updateList();
-  // });
+    }
+  });
 
 
 });
