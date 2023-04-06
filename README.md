@@ -92,3 +92,10 @@ End points for startup
 - get mem usage host
 Other startup
 - [0] is valid json
+- never even look up how to parse strings in bash
+- input.split(/[ ,]+/); will split a string and ignore all whitespace and commas
+- mongodb is nice but I am not sure how much I will use it in the future
+- debuging useing the console 12 window is the best way to debug webpage issues
+- node.js is nice to use, I had used it before a different way but now I now how to actually use it
+- still not 100% sure if my passwords are secure but I hope they are 
+- websockets provide faster update for information. I would have liked to start to use them rather than services. but alas I am good just using them on the host page
