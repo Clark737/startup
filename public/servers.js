@@ -81,11 +81,6 @@ $(document).ready(function () {
       for (let i = 0; i < images.length; i++) {
         if (images[i]._id === host) {
           document.getElementById('host_print').innerHTML = "Running On Host " + images[i].host;
-          // let unusedMem = images[i].memory - 3;
-          // memChart.data.datasets[0].data = [3, unusedMem];
-          // memChart.update();
-          // cpuChart.data.datasets[0].data = [100 / images[i].memory, 100 - 100 / images[i].memory];
-          // cpuChart.update();
           updateChart(images[i].memory);
           break;
         }
@@ -140,11 +135,7 @@ $(document).ready(function () {
       for (let i = 0; i < images.length; i++) {
         if (images[i]._id === host) {
           document.getElementById('host_print').innerHTML = "Running On Host " + images[i].host;
-          let unusedMem = images[i].memory - 3;
-          memChart.data.datasets[0].data = [3, unusedMem];
-          memChart.update();
-          cpuChart.data.datasets[0].data = [100 / images[i].memory, 100 - 100 / images[i].memory];
-          cpuChart.update();
+          updateChart(images[i].memory);
           break;
         }
       }

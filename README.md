@@ -90,3 +90,5 @@ End points for startup
 - get mem usage server
 - get cpu usage host
 - get mem usage host
+Other startup
+- [0] is valid json
