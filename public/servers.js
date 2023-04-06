@@ -30,10 +30,35 @@ async function getUser(userName) {
 
 
 $(document).ready(function () {
-  let host1Img = JSON.parse(localStorage.getItem("host1"));
-  let host2Img = JSON.parse(localStorage.getItem("host2"));
-  let host3Img = JSON.parse(localStorage.getItem("host3"));
+  async function updateChart(memory) {
+    try {
+      string = "https://www.randomnumberapi.com/api/v1.0/random?min=1&max=" + memory + "&count=1";
+      const response = await fetch(string, {
+        method: 'GET',
+      });
+      const memNum = await response.json();
+      
+      let unusedMem = memory - memNum[0];
+      memChart.data.datasets[0].data = [memNum[0], unusedMem];
+      memChart.update();
+    } catch {
+      // If there was an error then just dont do anything
 
+    }
+    try {
+      const response = await fetch('https://www.randomnumberapi.com/api/v1.0/random?min=1&max=100&count=1', {
+        method: 'GET',
+      });
+      const cpuNum = await response.json();
+      let unusedcpu = 100 - cpuNum[0];
+      cpuChart.data.datasets[0].data = [cpuNum[0], unusedcpu];
+      cpuChart.update();
+    } catch {
+      // If there was an error then just dont do anything
+
+    }
+
+  }
   async function updateList() {
     try {
       const response = await fetch('/api/serverAll', {
@@ -56,11 +81,12 @@ $(document).ready(function () {
       for (let i = 0; i < images.length; i++) {
         if (images[i]._id === host) {
           document.getElementById('host_print').innerHTML = "Running On Host " + images[i].host;
-          let unusedMem = images[i].memory - 3;
-          memChart.data.datasets[0].data = [3, unusedMem];
-          memChart.update();
-          cpuChart.data.datasets[0].data = [100 / images[i].memory, 100 - 100 / images[i].memory];
-          cpuChart.update();
+          // let unusedMem = images[i].memory - 3;
+          // memChart.data.datasets[0].data = [3, unusedMem];
+          // memChart.update();
+          // cpuChart.data.datasets[0].data = [100 / images[i].memory, 100 - 100 / images[i].memory];
+          // cpuChart.update();
+          updateChart(images[i].memory);
           break;
         }
       }
@@ -101,7 +127,7 @@ $(document).ready(function () {
     options: {
     }
   });
-  let images = updateList();
+  updateList();
   $("#select_image").change(async function () {
     try {
       const response = await fetch('/api/serverAll', {
@@ -144,7 +170,7 @@ $(document).ready(function () {
       let host = $("#select_image").find(":selected").val();
       for (let i = 0; i < images.length; i++) {
         if (images[i]._id === host) {
-          messg = {name: images[i].name, host: images[i].host, memory: images[i].memory}
+          messg = { name: images[i].name, host: images[i].host, memory: images[i].memory }
           break;
         }
       }
@@ -152,7 +178,7 @@ $(document).ready(function () {
       // If there was an error then just dont do anything
 
     }
-    
+
     console.log(JSON.stringify(messg));
     try {
       const response = await fetch('/api/stop', {
