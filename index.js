@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
 const DB = require('./database.js');
+const { WebSocketServer } = require('ws');
 
 const authCookieName = 'token';
 
@@ -180,6 +181,60 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
+server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+async function getserverinfo(){
+  try {
+    return '{"mem": 4, "cpu": 40}';
+  } 
+  catch {
+    return '{"mem": 4, "cpu": 40}';
+  }
+  
+}
+
+// Create a websocket object
+const wss = new WebSocketServer({ noServer: true });
+
+// Handle the protocol upgrade from HTTP to WebSocket
+server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, function done(ws) {
+    wss.emit('connection', ws, request);
+  });
+});
+
+let connections = [];
+
+wss.on('connection', async (ws) => {
+  const connection = { id: connections.length + 1, alive: true, ws: ws };
+  connections.push(connection);
+  ws.send(await getserverinfo());
+  // Respond to pong messages by marking the connection alive
+  ws.on('pong', async () => {
+    connection.alive = true;
+    connection.ws.send(await getserverinfo());
+  });
+  // Remove the closed connection so we don't try to forward anymore
+  ws.on('close', () => {
+    connections.findIndex((o, i) => {
+      if (o.id === connection.id) {
+        connections.splice(i, 1);
+        return true;
+      }
+    });
+  });
+});
+
+setInterval(() => {
+  connections.forEach((c) => {
+    // Kill any connection that didn't respond to the ping last time
+    if (!c.alive) {
+      c.ws.terminate();
+    } else {
+      c.alive = false;
+      c.ws.ping();
+    }
+  });
+}, 10000);

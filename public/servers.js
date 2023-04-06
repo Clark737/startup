@@ -100,10 +100,10 @@ $(document).ready(function () {
   let memChart = new Chart(memCtx, {
     type: 'pie',
     data: {
-      labels: ["Used", "Avalible"],
+      labels: ["Avalible", "Used"],
       datasets: [{
         data: [1200, 1700],
-        backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)"]
+        backgroundColor: ["rgba(100, 255, 0, 0.5)", "rgba(255, 0, 0, 0.5)"]
       }]
     },
     options: {
@@ -113,10 +113,10 @@ $(document).ready(function () {
   let cpuChart = new Chart(cpuCtx, {
     type: 'pie',
     data: {
-      labels: ["Used", "Avalible"],
+      labels: ["Avalible", "Used"],
       datasets: [{
         data: [1200, 1700],
-        backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)"]
+        backgroundColor: ["rgba(100, 255, 0, 0.5)", "rgba(255, 0, 0, 0.5)"]
       }]
     },
     options: {
