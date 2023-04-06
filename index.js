@@ -187,11 +187,30 @@ server = app.listen(port, () => {
 
 async function getserverinfo(){
   try {
-    return '{"mem": 4, "cpu": 40}';
+    const response = await fetch('http://ark.smilinglord.com:8080/cpu', {
+      method: 'GET',
+    });
+
+    const cpu = await response.json();
+    cpuVal = cpu.data.split(/[ ,]+/)[11];
+    try {
+      const response = await fetch('http://ark.smilinglord.com:8080/mem', {
+        method: 'GET',
+      });
+  
+      const mem = await response.json();
+      memVal = mem.data.split(/[ ,]+/)[6];
+      jsonMsg = {mem: parseInt(memVal), cpu: parseFloat(cpuVal)};
+      return JSON.stringify(jsonMsg);
+    } 
+    catch {
+      return '{"mem": 4, "cpu": 40}';
+    }
   } 
   catch {
     return '{"mem": 4, "cpu": 40}';
   }
+  
   
 }
 

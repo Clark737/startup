@@ -30,9 +30,9 @@ async function getUser(userName) {
 
 $(document).ready(function () {
   function updateChart(memory, cpu){
-    memChart.data.datasets[0].data = [16 - memory, memory];
+    memChart.data.datasets[0].data = [memory, 16 - memory];
     memChart.update();
-    cpuChart.data.datasets[0].data = [100 - cpu, cpu];
+    cpuChart.data.datasets[0].data = [cpu, 100 - cpu];
     cpuChart.update();
   }
   const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
