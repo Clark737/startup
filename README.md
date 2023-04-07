@@ -103,3 +103,12 @@ Other startup
 Simon React
 - constensts are just div replacements
 - first value is what goes in the html and second is the js partner
+- I am not evious to try and do this to my startup
+- I will follow the video though if i do
+- I love that it is extra credit now though!
+- I am confused at why react is easier that separating the js and html
+- I am glad it is done for me. 
+- It does not run just copying the repo and running the scrip
+- npm install bootstrap react-bootstrap is needed to be run on the computer that is pushing the code up to production
+- ^^ I had not run it on this computer
+- DONE!!
