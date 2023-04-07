@@ -99,3 +99,7 @@ Other startup
 - node.js is nice to use, I had used it before a different way but now I now how to actually use it
 - still not 100% sure if my passwords are secure but I hope they are 
 - websockets provide faster update for information. I would have liked to start to use them rather than services. but alas I am good just using them on the host page
+
+Simon React
+- constensts are just div replacements
+- first value is what goes in the html and second is the js partner
